@@ -286,21 +286,37 @@ document.addEventListener("DOMContentLoaded", function() {
   <div class="container">
     <h2 class="section-title center">Training Modules</h2>
     <div class="curriculum-grid">
-      <div class="curriculum-card"><div class="curriculum-number">1</div>Introduction to Virtual Assistance</div>
-      <div class="curriculum-card"><div class="curriculum-number">2</div>What Makes a Great VA</div>
-      <div class="curriculum-card"><div class="curriculum-number">3</div>VA Tools & Software</div>
-      <div class="curriculum-card"><div class="curriculum-number">4</div>Project & Task Management</div>
-      <div class="curriculum-card"><div class="curriculum-number">5</div>Email & Calendar Management</div>
-      <div class="curriculum-card"><div class="curriculum-number">6</div>Research & Data Entry</div>
-      <div class="curriculum-card"><div class="curriculum-number">7</div>Client Communication</div>
-      <div class="curriculum-card"><div class="curriculum-number">8</div>Getting Hired as a VA</div>
-      <div class="curriculum-card"><div class="curriculum-number">9</div>Practical VA Tasks</div>
-      <div class="curriculum-card"><div class="curriculum-number">10</div>Pitching & Negotiation</div>
-      <div class="curriculum-card"><div class="curriculum-number">11</div>Planning Your Next Steps</div>
-      <div class="curriculum-card"><div class="curriculum-number">12</div>Advanced VA Skills</div>
+      <div class="curriculum-card" data-module="onboarding"><div class="curriculum-number">1</div>Welcome & Onboarding</div>
+      <div class="curriculum-card" data-module="intro-va"><div class="curriculum-number">2</div>Introduction to Virtual Assistance</div>
+      <div class="curriculum-card" data-module="great-va"><div class="curriculum-number">3</div>What Makes a Great Virtual Assistant</div>
+      <div class="curriculum-card" data-module="va-tools"><div class="curriculum-number">4</div>VA Tools & Productivity Software</div>
+      <div class="curriculum-card" data-module="project-management"><div class="curriculum-number">5</div>Project & Task Management</div>
+      <div class="curriculum-card" data-module="email-calendar"><div class="curriculum-number">6</div>Email & Calendar Management</div>
+      <div class="curriculum-card" data-module="research-data"><div class="curriculum-number">7</div>Research & Data Entry</div>
+      <div class="curriculum-card" data-module="client-communication"><div class="curriculum-number">8</div>Client Communication & Professional Etiquette</div>
+      <div class="curriculum-card" data-module="getting-hired"><div class="curriculum-number">9</div>Getting Hired as a Virtual Assistant</div>
+      <div class="curriculum-card" data-module="practical-tasks"><div class="curriculum-number">10</div>Practical VA Tasks & Hands-On Practice</div>
+      <div class="curriculum-card" data-module="pitching-networking"><div class="curriculum-number">11</div>Pitching, Networking & Negotiation</div>
+      <div class="curriculum-card" data-module="next-steps"><div class="curriculum-number">12</div>Planning Your Next Steps as a VA</div>
     </div>
   </div>
 </section>
+
+<!-- MODULE DETAILS MODAL -->
+<div id="module-modal" class="modal" aria-hidden="true">
+  <div class="modal-overlay" data-close="true"></div>
+  <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" aria-label="Close modal">×</button>
+    <div class="modal-content">
+      <div class="modal-nav">
+        <button class="modal-prev" aria-label="Previous module">‹</button>
+        <h3 id="modal-title"></h3>
+        <button class="modal-next" aria-label="Next module">›</button>
+      </div>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+</div>
 
 <!-- IMAGE SHOWCASE -->
 <section id="images" class="section dark">
@@ -473,6 +489,239 @@ document.addEventListener("DOMContentLoaded", function() {
     © 2026 T21 Services. All rights reserved.
   </div>
 </footer>
+
+<script>
+(function(){
+  const moduleData = {
+    "onboarding": {
+      title: "Welcome & Onboarding",
+      html: `<ul>
+        <li>Orientation to the programme and schedule</li>
+        <li>Introduction to VA career opportunities</li>
+        <li>Setting learning goals and expectations</li>
+        <li>Professional mindset and habits for remote work</li>
+        <li>Introduction to learning tools</li>
+      </ul>`
+    },
+    "intro-va": {
+      title: "Introduction to Virtual Assistance",
+      html: `<ul>
+        <li>Understanding the Virtual Assistant profession</li>
+        <li>Types of VA services and industries</li>
+        <li>Freelance, remote, and full-time VA pathways</li>
+        <li>Roles, responsibilities, and expectations</li>
+      </ul>`
+    },
+    "great-va": {
+      title: "What Makes a Great Virtual Assistant",
+      html: `<ul>
+        <li>Core VA skills: communication, organization, problem-solving</li>
+        <li>Time management and self-discipline</li>
+        <li>Professional attitude and work ethics</li>
+        <li>Understanding client expectations and VA responsibilities</li>
+      </ul>`
+    },
+    "va-tools": {
+      title: "VA Tools & Productivity Software",
+      html: `<ul>
+        <li>Google Workspace: Docs, Sheets, Slides, Drive, Forms</li>
+        <li>Calendar management and scheduling tools</li>
+        <li>Email tools and inbox organization</li>
+        <li>Project management tools: Trello, Asana, and similar platforms</li>
+        <li>Collaboration tools such as Slack</li>
+        <li>Online research and productivity tools</li>
+      </ul>`
+    },
+    "project-management": {
+      title: "Project & Task Management",
+      html: `<ul>
+        <li>Task prioritization and workflow planning</li>
+        <li>Managing multiple client projects</li>
+        <li>Tracking deadlines and deliverables</li>
+        <li>Using task management systems effectively</li>
+        <li>Productivity and efficiency techniques</li>
+      </ul>`
+    },
+    "email-calendar": {
+      title: "Email & Calendar Management",
+      html: `<ul>
+        <li>Professional email writing and communication</li>
+        <li>Email organization and best practices</li>
+        <li>Calendar scheduling and appointment management</li>
+        <li>Managing reminders and follow-ups</li>
+      </ul>`
+    },
+    "research-data": {
+      title: "Research & Data Entry",
+      html: `<ul>
+        <li>Conducting effective online research</li>
+        <li>Data collection and information accuracy</li>
+        <li>Data entry techniques and best practices</li>
+        <li>Document preparation and record management</li>
+        <li>Spreadsheet management</li>
+      </ul>`
+    },
+    "client-communication": {
+      title: "Client Communication & Professional Etiquette",
+      html: `<ul>
+        <li>Communicating professionally with clients</li>
+        <li>Managing client requests and feedback</li>
+        <li>Virtual meeting etiquette</li>
+        <li>Building long-term client relationships</li>
+      </ul>`
+    },
+    "getting-hired": {
+      title: "Getting Hired as a Virtual Assistant",
+      html: `<ul>
+        <li>Freelance vs full-time VA roles</li>
+        <li>Job search strategies for VA opportunities</li>
+        <li>Platforms for finding VA jobs and clients</li>
+        <li>Building a professional CV and online presence</li>
+        <li>Networking fundamentals</li>
+      </ul>`
+    },
+    "practical-tasks": {
+      title: "Practical VA Tasks & Hands-On Practice",
+      html: `<ul>
+        <li>Simulated client tasks</li>
+        <li>Guided practical assignments</li>
+        <li>Real-life VA work scenarios</li>
+        <li>Performance feedback and improvement</li>
+        <li>Portfolio creation using completed tasks</li>
+      </ul>`
+    },
+    "pitching-networking": {
+      title: "Pitching, Networking, Interviews & Negotiation",
+      html: `<ul>
+        <li>Crafting service pitches and proposals</li>
+        <li>Networking online and offline</li>
+        <li>Interview preparation and mock interviews</li>
+        <li>Negotiating rates and contracts</li>
+      </ul>`
+    },
+    "next-steps": {
+      title: "Planning Your Next Steps as a VA",
+      html: `<ul>
+        <li>Identifying and developing niche VA skills</li>
+        <li>Workflow and productivity optimization</li>
+        <li>CV, LinkedIn, and freelance profile optimization</li>
+        <li>Career planning and next steps</li>
+      </ul>`
+    }
+  };
+
+  const modal = document.getElementById('module-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalBody = document.getElementById('modal-body');
+  const closeBtn = modal.querySelector('.modal-close');
+  const modalPrev = modal.querySelector('.modal-prev');
+  const modalNext = modal.querySelector('.modal-next');
+  const moduleKeys = Object.keys(moduleData);
+  let currentKey = null;
+  let lastFocused = null;
+
+  function updateNavButtons() {
+    const idx = moduleKeys.indexOf(currentKey);
+    // disable prev when at first module, next when at last module
+    modalPrev.disabled = idx <= 0;
+    modalNext.disabled = idx >= moduleKeys.length - 1;
+    modalPrev.setAttribute('aria-disabled', modalPrev.disabled);
+    modalNext.setAttribute('aria-disabled', modalNext.disabled);
+  }
+
+  function openModal(key) {
+    const data = moduleData[key];
+    if (!data) return;
+    currentKey = key;
+    modalTitle.textContent = data.title;
+    modalBody.innerHTML = data.html;
+    updateNavButtons();
+    // if modal is currently hidden, store the element that had focus
+    const wasHidden = modal.getAttribute('aria-hidden') === 'true';
+    if (wasHidden) {
+      lastFocused = document.activeElement;
+      document.body.style.overflow = 'hidden';
+    }
+    modal.setAttribute('aria-hidden', 'false');
+    if (wasHidden) {
+      closeBtn.focus();
+    }
+  }
+
+  function closeModal() {
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastFocused) lastFocused.focus();
+  }
+
+  // Open when curriculum card clicked
+  document.querySelectorAll('.curriculum-card[data-module]').forEach(card => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', () => {
+      const key = card.getAttribute('data-module');
+      openModal(key);
+    });
+    card.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const key = card.getAttribute('data-module');
+        openModal(key);
+      }
+    });
+    card.setAttribute('tabindex', '0');
+  });
+
+  // navigation helpers
+  function navigateModule(step) {
+    const idx = moduleKeys.indexOf(currentKey);
+    if (idx !== -1) {
+      const newIdx = idx + step;
+      if (newIdx < 0 || newIdx >= moduleKeys.length) return; // out of bounds
+      openModal(moduleKeys[newIdx]);
+    }
+  }
+
+  modalPrev.addEventListener('click', () => navigateModule(-1));
+  modalNext.addEventListener('click', () => navigateModule(1));
+
+  // Close handlers
+  closeBtn.addEventListener('click', closeModal);
+  modal.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', closeModal));
+
+  // keyboard navigation & focus trap
+  function trapTab(e) {
+    const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (modal.getAttribute('aria-hidden') === 'false') {
+      if (e.key === 'Escape') {
+        closeModal();
+      } else if (e.key === 'ArrowRight') {
+        navigateModule(1);
+      } else if (e.key === 'ArrowLeft') {
+        navigateModule(-1);
+      } else if (e.key === 'Tab') {
+        trapTab(e);
+      }
+    }
+  });
+})();
+</script>
 
 </body>
 </html>

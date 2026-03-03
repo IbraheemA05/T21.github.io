@@ -512,13 +512,13 @@ nav a:hover {
 ======================== */
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
 }
 
 .feature-item {
   background: var(--color-bg-light);
-  padding: 32px;
+  padding: 22px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border-light);
   transition: all var(--transition-medium);
@@ -532,7 +532,7 @@ nav a:hover {
 }
 
 .feature-icon {
-  font-size: 42px;
+  font-size: 35px;
   color: var(--color-accent);
   margin-bottom: 15px;
   display: inline-block;
@@ -1410,4 +1410,99 @@ nav a:hover {
   .card-icon {
     font-size: 36px;
   }
+}
+
+/* =========================
+   MODULE MODAL STYLES
+========================= */
+.modal {
+  display: none;
+}
+.modal[aria-hidden="false"] {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(2,8,20,0.6);
+  backdrop-filter: blur(4px);
+}
+.modal-dialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(600px, 90%);
+  animation: modalScale 0.3s ease forwards;
+  max-height: 90vh;
+  overflow: auto;
+  background: linear-gradient(180deg, var(--color-bg-light), var(--color-bg-darker));
+  border-radius: 12px;
+  border: 1px solid var(--color-border-light);
+  box-shadow: 0 30px 80px rgba(3,8,20,0.6);
+}
+.modal-content {
+  padding: 28px 30px;
+  color: var(--color-text-primary);
+}
+.modal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.modal-prev,
+.modal-next {
+  background: var(--color-bg-darker);
+  color: var(--color-accent);
+  border: none;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+.modal-prev:hover,
+.modal-next:hover {
+  background: var(--color-bg-light);
+}
+
+.modal-prev:disabled,
+.modal-next:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+@keyframes modalScale {
+  from { transform: translate(-50%, -50%) scale(0.8); opacity:0; }
+  to { transform: translate(-50%, -50%) scale(1); opacity:1; }
+}
+.modal-close {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  background: transparent;
+  border: none;
+  color: var(--color-text-primary);
+  font-size: 28px;
+  cursor: pointer;
+}
+#modal-title {
+  margin: 0 0 12px 0;
+  color: var(--color-accent);
+}
+.modal-body ul {
+  margin-top: 10px;
+  margin-left: 18px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+.modal-body p { color: var(--color-text-secondary); }
+
+@media (max-width: 600px) {
+  .modal-content { padding: 18px; }
+  .modal-close { font-size: 24px; right: 8px; top: 6px; }
 }
