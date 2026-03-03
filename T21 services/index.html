@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>T21 Services — Virtual Assistant Training</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="responsive-new.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<!-- Font Awesome for section icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <script>
 function toggleMenu() {
@@ -27,6 +30,73 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   });
+});
+
+// Carousel functionality
+let currentSlide = 0;
+let slides = [];
+let totalSlides = 0;
+let autoplayInterval;
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.remove("active");
+    if (i === index) {
+      slide.classList.add("active");
+    }
+  });
+  updateIndicators();
+}
+
+function nextSlide() {
+  if (totalSlides > 0) {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+    resetAutoplay();
+  }
+}
+
+function prevSlide() {
+  if (totalSlides > 0) {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    showSlide(currentSlide);
+    resetAutoplay();
+  }
+}
+
+function updateIndicators() {
+  const indicators = document.querySelectorAll(".carousel-indicator");
+  indicators.forEach((indicator, i) => {
+    indicator.classList.toggle("active", i === currentSlide);
+  });
+}
+
+function resetAutoplay() {
+  clearInterval(autoplayInterval);
+  startAutoplay();
+}
+
+function startAutoplay() {
+  autoplayInterval = setInterval(nextSlide, 5000);
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  slides = document.querySelectorAll(".testimonial-slide");
+  totalSlides = slides.length;
+  
+  if (totalSlides > 0) {
+    showSlide(0);
+    startAutoplay();
+    
+    const indicators = document.querySelectorAll(".carousel-indicator");
+    indicators.forEach((indicator, i) => {
+      indicator.addEventListener("click", () => {
+        currentSlide = i;
+        showSlide(i);
+        resetAutoplay();
+      });
+    });
+  }
 });
 </script>
 <body>
@@ -74,9 +144,9 @@ document.addEventListener("DOMContentLoaded", function() {
         <a href="#curriculum" class="secondary-btn">View Curriculum</a>
       </div>
       <div class="trust">
-        <span>✔ Beginner Friendly</span>
-        <span>✔ Remote Job Ready</span>
-        <span>✔ Certificate Included</span>
+        <span>Beginner Friendly</span>
+        <span>Remote Job Ready</span>
+        <span>Certificate Included</span>
       </div>
     </div>
 
@@ -100,6 +170,41 @@ document.addEventListener("DOMContentLoaded", function() {
   </div>
 </section>
 
+<!-- WHO IS THIS FOR -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title center">Who This Training Is For</h2>
+    <p class="center subtext">This program is perfect for anyone looking to build a career in virtual assistance</p>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fas fa-star" aria-hidden="true"></i></div>
+        <h3>Beginners with Little or No Experience</h3>
+        <p>No prior tech experience required. We start from the basics and build up.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fas fa-graduation-cap" aria-hidden="true"></i></div>
+        <h3>Students and Graduates</h3>
+        <p>Perfect for building practical skills while still in school or after graduation.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fas fa-search" aria-hidden="true"></i></div>
+        <h3>Job Seekers</h3>
+        <p>Get trained, certified, and job-ready to land your first remote position.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fas fa-briefcase" aria-hidden="true"></i></div>
+        <h3>Freelancers and Career Switchers</h3>
+        <p>Expand your skill set or completely transition to virtual assistance.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fas fa-laptop-house" aria-hidden="true"></i></div>
+        <h3>Remote Work Enthusiasts</h3>
+        <p>Anyone interested in flexible, remote, or work-from-home opportunities.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- WHY COURSE -->
 <section class="section">
   <div class="container">
@@ -115,16 +220,48 @@ document.addEventListener("DOMContentLoaded", function() {
   <div class="container">
     <h2 class="section-title center">Why Choose T21 Services?</h2>
     <div class="grid-3">
-      <div class="card"><div class="card-icon">🎯</div><h3>Beginner-Friendly Training</h3><p>Step-by-step guidance for all skill levels.</p></div>
-      <div class="card"><div class="card-icon">👨‍🏫</div><h3>Expert-Led Instructors</h3><p>Industry professionals teaching practical skills.</p></div>
-      <div class="card"><div class="card-icon">💼</div><h3>Hands-On Training</h3><p>Real-world projects you can apply immediately.</p></div>
-      <div class="card"><div class="card-icon">🚀</div><h3>Career Support</h3><p>Personalized advice and job alerts.</p></div>
-      <div class="card"><div class="card-icon">🌐</div><h3>Remote Internship</h3><p>Gain experience with partner organizations worldwide.</p></div>
-      <div class="card"><div class="card-icon">📜</div><h3>Professional Certificate</h3><p>Boost your resume and career.</p></div>
-      <div class="card"><div class="card-icon">🛠️</div><h3>Modern Tools</h3><p>Train with the latest software in the industry.</p></div>
-      <div class="card"><div class="card-icon">🌍</div><h3>Global Reach</h3><p>Opportunities to work with international clients.</p></div>
-      <div class="card"><div class="card-icon">📈</div><h3>Proven Results</h3><p>Learn from professionals whose graduates succeed.</p></div>
-      <div class="card"><div class="card-icon">💪</div><h3>Skill Transformation</h3><p>Become job-ready for global opportunities.</p></div>
+      <div class="card"><div class="card-icon"><i class="fas fa-user-graduate" aria-hidden="true"></i></div><h3>Beginner-Friendly Training</h3><p>Step-by-step guidance for all skill levels.</p></div>
+      <div class="card"><div class="card-icon"><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i></div><h3>Expert-Led Instructors</h3><p>Industry professionals teaching practical skills.</p></div>
+      <div class="card"><div class="card-icon"><i class="fas fa-briefcase" aria-hidden="true"></i></div><h3>Hands-On Training</h3><p>Real-world projects you can apply immediately.</p></div>
+      <div class="card"><div class="card-icon"><i class="fas fa-rocket" aria-hidden="true"></i></div><h3>Career Support</h3><p>Personalized advice and job alerts.</p></div>
+      <div class="card"><div class="card-icon"><i class="fas fa-globe" aria-hidden="true"></i></div><h3>Remote Internship</h3><p>Gain experience with partner organizations worldwide.</p></div>
+      <div class="card"><div class="card-icon"><i class="fas fa-certificate" aria-hidden="true"></i></div><h3>Professional Certificate</h3><p>Boost your resume and career.</p></div>
+      <div class="card"><div class="card-icon"><i class="fas fa-tools" aria-hidden="true"></i></div><h3>Modern Tools</h3><p>Train with the latest software in the industry.</p></div>
+      <div class="card"><div class="card-icon"><i class="fas fa-globe-americas" aria-hidden="true"></i></div><h3>Global Reach</h3><p>Opportunities to work with international clients.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE THIS TRAINING -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title center">Why Choose This Training?</h2>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-number">1</div>
+        <h3>Practical, Hands-On Learning</h3>
+        <p>Learn by doing real tasks, not just theory. Build a portfolio as you train.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-number">2</div>
+        <h3>Beginner-Friendly Approach</h3>
+        <p>Start from scratch with patient instructors who understand where you're coming from.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-number">3</div>
+        <h3>Flexible Class Schedules</h3>
+        <p>Weekday and weekend classes. Online and onsite options to fit your lifestyle.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-number">4</div>
+        <h3>Real-World VA Tasks & Examples</h3>
+        <p>Master the exact skills employers and clients are looking for right now.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-number">5</div>
+        <h3>Supportive Learning Environment</h3>
+        <p>Learn alongside peers with similar goals in a collaborative, encouraging space.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -145,6 +282,7 @@ document.addEventListener("DOMContentLoaded", function() {
       <div class="curriculum-card"><div class="curriculum-number">9</div>Practical VA Tasks</div>
       <div class="curriculum-card"><div class="curriculum-number">10</div>Pitching & Negotiation</div>
       <div class="curriculum-card"><div class="curriculum-number">11</div>Planning Your Next Steps</div>
+      <div class="curriculum-card"><div class="curriculum-number">12</div>Advanced VA Skills</div>
     </div>
   </div>
 </section>
@@ -174,10 +312,107 @@ document.addEventListener("DOMContentLoaded", function() {
 <section id="results" class="section dark">
   <div class="container">
     <h2 class="section-title center">Student Testimonials</h2>
-    <div class="testimonial-grid">
-      <div class="testimonial"><p class="testimonial-text">"I got my first international client 3 weeks after training."</p><p class="testimonial-author">— Sarah T.</p></div>
-      <div class="testimonial"><p class="testimonial-text">"Best investment I made this year."</p><p class="testimonial-author">— Michael A.</p></div>
-      <div class="testimonial"><p class="testimonial-text">"Very practical and premium training."</p><p class="testimonial-author">— Grace O.</p></div>
+    <div class="carousel-container">
+      <div class="carousel-wrapper">
+        <div class="testimonial-slide active">
+          <div class="testimonial-card">
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">"I got my first international client 3 weeks after training. The practical approach and support from instructors made all the difference. Highly recommend!"</p>
+            <div class="testimonial-author-info">
+              <div class="author-avatar">S</div>
+              <div>
+                <p class="testimonial-author">Sarah T.</p>
+                <p class="author-title">Virtual Assistant</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">"Best investment I made this year. The curriculum is comprehensive, and I've already landed two remote clients. Worth every naira!"</p>
+            <div class="testimonial-author-info">
+              <div class="author-avatar">M</div>
+              <div>
+                <p class="testimonial-author">Michael A.</p>
+                <p class="author-title">Digital Entrepreneur</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">"Very practical and premium training. The instructors are patient and the tools we learned are exactly what I need. I'm now working with international companies!"</p>
+            <div class="testimonial-author-info">
+              <div class="author-avatar">G</div>
+              <div>
+                <p class="testimonial-author">Grace O.</p>
+                <p class="author-title">Executive Assistant</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <button class="carousel-nav carousel-nav-prev" onclick="prevSlide()" aria-label="Previous testimonial">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="carousel-nav carousel-nav-next" onclick="nextSlide()" aria-label="Next testimonial">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+      
+      <div class="carousel-indicators">
+        <span class="carousel-indicator active" aria-label="Testimonial 1"></span>
+        <span class="carousel-indicator" aria-label="Testimonial 2"></span>
+        <span class="carousel-indicator" aria-label="Testimonial 3"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUESTIONS -->
+<section class="section dark">
+  <div class="container">
+    <h2 class="section-title center">Have Questions?</h2>
+    <p class="center subtext">Ready to start your Virtual Assistant journey? We're here to help!</p>
+    <div class="contact-box">
+      <div class="contact-method">
+        <div class="contact-icon"><i class="fas fa-whatsapp" aria-hidden="true"></i></div>
+        <h3>WhatsApp</h3>
+        <p>Chat directly with our team for instant answers</p>
+        <a href="https://wa.me/2340000000000" class="contact-link">Message us on WhatsApp</a>
+      </div>
+      <div class="contact-method">
+        <div class="contact-icon"><i class="fas fa-envelope" aria-hidden="true"></i></div>
+        <h3>Email</h3>
+        <p>Send us a detailed inquiry and we'll respond within 24 hours</p>
+        <p class="email-text">contact@t21services.com</p>
+      </div>
+      <div class="contact-method">
+        <div class="contact-icon"><i class="fas fa-phone" aria-hidden="true"></i></div>
+        <h3>Phone</h3>
+        <p>Call us to speak with an enrollment advisor</p>
+        <p class="phone-text">+234 XXX XXX XXXX</p>
+      </div>
     </div>
   </div>
 </section>
