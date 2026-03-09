@@ -84,7 +84,9 @@ img {
   gap: 10px;
 }
 .logo img {
-  height: 42px;
+  height: 40px;
+  position: ;
+  z-index: 1;
 }
 .logo-text {
   display: flex;
